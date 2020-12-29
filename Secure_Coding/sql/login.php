@@ -10,8 +10,8 @@
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error)
         die("Connection failed: " . $conn->connect_error);
-    $user = $_POST['username'];
-    $pass = $_POST['password'];
+    $user = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+    $pass = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
     $sql = "SELECT * FROM login WHERE User='$user' AND Password='$pass'";
     if ($result = $conn->query($sql))
     {
